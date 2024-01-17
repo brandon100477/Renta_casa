@@ -1,4 +1,6 @@
 from tkinter import Tk, Label,Button, Entry
+from Views.sesion import inicio
+from Views.view1 import welcome
 
 #función de prueba
 def fnSuma(n1, n2):
@@ -7,5 +9,16 @@ def fnSuma(n1, n2):
 def create_label(text, window):
     return Label(window, text=text, font=("Arial", 14))
 #Función de estilos de botón
-def create_Button(text, window):
-    return Button(window, text=text, font=("Arial", 16),command=lambda: print("Hello word!"), background="#3A94E7")
+def create_Button(text, window, command):
+    return Button(window, text=text, font=("Arial", 16),command=command, background="#3A94E7")
+
+def close_Button(text, window, command):
+    return Button(window, text=text, font=("Arial", 16),command=command, background="#E73A3A")
+
+def open1(self):
+    self.window.destroy()
+    welcome()
+    
+def open2(self):
+    self.window2.destroy()
+    inicio()
