@@ -7,6 +7,17 @@ from customtkinter import CTk, CTkFrame #Instalar la libreria de customtkinter
 class welcome():
     
     def __init__(self):
+        
+        def focus_in1(event):
+            if self.search.get() == "Buscar...":
+                self.search.delete(0, 'end')
+                self.search.config(fg=backController.negro)
+
+        def focus_out1(event):
+            if self.search.get() == "":
+                self.search.insert(0, 'Buscar...')
+                self.search.config(fg=backController.gris_claro)
+                
         self.window = Tk()
         self.window.geometry("1366x768+105+20") # Creación de ventana
         self.window.title("Bienvenid@") #titulo
@@ -26,9 +37,11 @@ class welcome():
         lbl.place(relx=0.41, y=22, relheight=0.05, relwidth=0.19) #Posición del titulo de entrada
         
         
-        search = Entry(self.window,bg=backController.gris_claro)
-        search.place(relx=0.35, rely=0.16, relheight=0.05, relwidth=0.6)
-        
+        self.search = Entry(self.window,bg=backController.gris_claro, bd=0.5, highlightthickness=0, insertwidth=2, justify='left', font=("Arial", 13), fg=backController.gris_oscuro)
+        self.search.place(relx=0.35, rely=0.16, relheight=0.05, relwidth=0.6)
+        self.search.insert(0, "Buscar...") #Implementacion de placeholder
+        self.search.bind("<FocusIn>", focus_in1) #Controlador de eventos
+        self.search.bind("<FocusOut>",focus_out1) #Controlador de eventos
         
         btn1 = backController.btn_inicio('Arrendatario', self.window, command=lambda: print("Arrendamiento"))
         btn1.place(relx=0.05, rely=0.2, relheight=0.06, relwidth=0.18)
