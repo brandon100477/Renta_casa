@@ -65,6 +65,9 @@ class inicio():
         
         btn = backController.create_Button('Ingresar', self.window, command=lambda: backController.open1(self))
         btn.place(relx=0.22, rely=0.89, relheight=0.06, relwidth=0.12)
+        
+        btn1 = backController.create_Button1('Registrar', self.window, command=lambda: backController.registrar(self))
+        btn1.place(relx=0.42, rely=0.89, relheight=0.06, relwidth=0.12)
         #Creacion del logo
         logo = PhotoImage(file= 'img/icon.png')
         self.window.call('wm', 'iconphoto', self.window, logo ) #implementación del logo

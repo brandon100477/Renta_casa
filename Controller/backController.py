@@ -1,9 +1,10 @@
 from tkinter import Tk, Label,Button, Entry
 from Views.sesion import inicio
 from Views.view1 import welcome
+from Views.register import register
 
 
-global blanco, negro, gris, azul, rojo, azul_fg, rojo_fg, gris_claro,gris_oscuro
+global blanco, negro, gris, azul, rojo, azul_fg, rojo_fg, gris_claro,gris_oscuro, verde, var
 blanco = '#FFFFFF'
 gris = '#CFCFCF'
 azul = '#3A94E7'
@@ -13,6 +14,8 @@ rojo_fg = '#DE0000'
 negro = '#000000'
 gris_claro = '#FBFBFB'
 gris_oscuro ='#B8B8B8'
+verde ='#61C12E'
+var = '#56a5c6'
 #función de prueba
 def fnSuma(n1, n2):
     print(int(n1) + int(n2))
@@ -27,6 +30,9 @@ def create_label2(text, window):
 def create_Button(text, window, command):
     return Button(window, text=text, font=("Arial", 16),command=command, bg=azul, fg=blanco)
 
+def create_Button1(text, window, command):
+    return Button(window, text=text, font=("Arial", 16),command=command, bg=verde, fg=blanco)
+
 def btn_inicio(text, window, command):
     return Button(window, text=text, font=("Arial", 16),command=command, bg=azul, fg=blanco)
 
@@ -40,3 +46,7 @@ def open1(self):
 def open2(self):
     self.window.destroy()
     inicio()
+    
+def registrar(self):
+    self.window.destroy()
+    register()
