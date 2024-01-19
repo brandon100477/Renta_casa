@@ -2,7 +2,8 @@ from tkinter import Tk, Label, Entry, PhotoImage, Canvas
 import Controller.backController as backController
 from PIL import Image, ImageTk  #Instalar la libreria de PIL
 from customtkinter import CTk, CTkFrame #Instalar la libreria de customtkinter
-import database.Connection as conexion
+import database.Connection as conect
+
 
 
 class register():
@@ -106,6 +107,9 @@ class register():
         
         btn = backController.create_Button1('Iniciar sesión', self.window, command=lambda: backController.open2(self))
         btn.place(relx=0.75, rely=0.8, relheight=0.06, relwidth=0.18) #Botón para cerrar sesión
+        
+        btn = backController.btn_inicio('Registrar', self.window, command=lambda: backController.registrar2(self))
+        btn.place(relx=0.55, rely=0.8, relheight=0.06, relwidth=0.18) #Botón para cerrar sesión
         #Creacion del logo
         logo = PhotoImage(file= 'img/icon.png')
         self.window.call('wm', 'iconphoto', self.window, logo)
