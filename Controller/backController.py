@@ -3,8 +3,10 @@ from Views.sesion import inicio
 from Views.view1 import welcome
 from Views.register import register
 import database.Connection as conect
-import mysql.connector
+import mysql.connector as mysql
+import hashlib
 
+#Variables de entorno
 global blanco, negro, gris, azul, rojo, azul_fg, rojo_fg, gris_claro,gris_oscuro, verde, var
 blanco = '#FFFFFF'
 gris = '#CFCFCF'
@@ -40,10 +42,28 @@ def btn_inicio(text, window, command):
 def close_Button(text, window, command):
     return Button(window, text=text, font=("Arial", 16),command=command, bg=rojo, fg= negro)
 
-def open1(self):
-    self.window.destroy()
-    welcome()
-    
+def encriptar(contrasena):
+    hash_contrasena = hashlib.sha256(contrasena.encode("utf-8")).hexdigest()
+    return hash_contrasena
+
+def open1(self): #Función para loguearse
+    documento = self.txt1.get()
+    password = self.txt2.get()
+    encriptada = (encriptar(password))
+    modific = "('"+encriptada+"',)" #Modificación de la clave encriptada para ser comparada
+    conexion_registro = conect.registro() #conexion a data base
+    cursor = conexion_registro.conexion.cursor()
+    encrip = cursor.execute("SELECT password FROM usuario WHERE documento = %s", (documento,)) #data base query
+    row = cursor.fetchone() #query type tupla
+    scrip = str(row) #tupla in string
+    if modific == scrip: #comparation
+        self.window.destroy()
+        welcome()
+    elif row is None and encrip is None:
+        messagebox.showinfo("Error","Usuario no existe. Por favor registrarse") #Error alert
+    elif modific !=scrip:
+        messagebox.showinfo("Error","Contraseña incorrecta. Intente nuevamente")#Error alert
+
 def open2(self):
     self.window.destroy()
     inicio()
@@ -55,10 +75,9 @@ def registrar(self):
 def registrar2(self):
     # Recoge los valores de los campos de texto
     documento = self.txt1.get()
-    password = self.txt2.get()
+    password = encriptar(self.txt2.get())
     nombre = self.txt3.get()
     apellido = self.txt4.get()
-    
     try:
         # Crea una instancia de la clase 'registro' que maneja la conexión
         conexion_registro = conect.registro()
@@ -72,5 +91,5 @@ def registrar2(self):
         messagebox.showinfo("Éxito", "Registro exitoso")# Muestra un mensaje de éxito
         self.window.destroy()
         inicio()
-    except mysql.connector.Error as err:
+    except mysql.Error as err:
         messagebox.showerror("Error", f"Error en la base de datos: {err}")# Muestra un mensaje de error si hay un problema con la base de datos
