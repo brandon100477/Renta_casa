@@ -1,4 +1,4 @@
-from tkinter import Tk, Label,Button, Entry, PhotoImage, Frame, Canvas
+from tkinter import Tk, Label,Button, Entry, PhotoImage, Frame
 import Controller.backController as backController
 from PIL import Image, ImageTk  #Instalar la libreria de PIL
 from customtkinter import CTk, CTkFrame #Instalar la libreria de customtkinter
@@ -44,20 +44,23 @@ class welcome():
         self.search.bind("<FocusOut>",focus_out1) #Controlador de eventos
         
         btn1 = backController.btn_inicio('Arrendatario', self.window, command=lambda: print("Arrendamiento"))
-        btn1.place(relx=0.05, rely=0.2, relheight=0.06, relwidth=0.18)
+        btn1.place(relx=0.05, rely=0.15, relheight=0.06, relwidth=0.18)
         
-        btn2 = backController.btn_inicio('Agregar', self.window, command=lambda: print("Agregar"))
-        btn2.place(relx=0.05, rely=0.35, relheight=0.06, relwidth=0.18)
+        btn2 = backController.btn_inicio('Agregar Propietario', self.window, command=lambda:backController.aadd(self))
+        btn2.place(relx=0.05, rely=0.30, relheight=0.06, relwidth=0.18)
+        
+        btn2 = backController.btn_inicio('Agregar Propiedad', self.window, command=lambda:backController.aadd(self))
+        btn2.place(relx=0.05, rely=0.45, relheight=0.06, relwidth=0.18)
         
         btn3 = backController.btn_inicio('Ult. vez ingresado', self.window, command=lambda: print("Ult. vez ingresado"))
-        btn3.place(relx=0.05, rely=0.5, relheight=0.06, relwidth=0.18)
+        btn3.place(relx=0.05, rely=0.60, relheight=0.06, relwidth=0.18)
         
         btn4 = backController.btn_inicio('Filtrar', self.window, command=lambda: print("Filtrar"))
-        btn4.place(relx=0.05, rely=0.65, relheight=0.06, relwidth=0.18)
+        btn4.place(relx=0.05, rely=0.75, relheight=0.06, relwidth=0.18)
         
         
         btn = backController.close_Button('Cerrar sesión', self.window, command=lambda: backController.open2(self))
-        btn.place(relx=0.05, rely=0.8, relheight=0.06, relwidth=0.18) #Botón para cerrar sesión
+        btn.place(relx=0.05, rely=0.90, relheight=0.06, relwidth=0.18) #Botón para cerrar sesión
         #Creacion del logo
         logo = PhotoImage(file= 'img/icon.png')
         self.window.call('wm', 'iconphoto', self.window, logo)
