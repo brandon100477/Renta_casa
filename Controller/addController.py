@@ -1,5 +1,6 @@
 from tkinter import Tk, Label,Button, Entry, messagebox
 from Views.addHome import home
+from Views.addProperty import propet
 
 from Views.view1 import welcome
 from Views.register import register
@@ -12,6 +13,10 @@ import Controller.backController as backController
 def house(self):
     self.window.destroy()
     home()
+    
+def prop(self):
+    self.window.destroy()
+    propet()
 
 
 def registrar2(self):
@@ -81,4 +86,9 @@ def registrarhome(self):
             welcome()
     except mysql.Error as err:
         messagebox.showerror("Error", f"Error en la base de datos: {err}")# Muestra un mensaje de error si hay un problema con la base de datos
-        
+
+def mostrarseleccionado(self):
+            if self.txt4.get()==1:
+                self.label1.configure(text="opcion seleccionada=Varon")
+            if self.txt4.get()==2:
+                self.label1.configure(text="opcion seleccionada=Mujer")
